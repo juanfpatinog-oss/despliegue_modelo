@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 #Cargamos el modelo
 import pickle
 filename = 'modelo-NN.pkl'
-modelo, min_max_scaler, variables = pickle.load(open(filename, 'rb'))
+modelo, labelencoder, min_max_scaler, variables = pickle.load(open(filename, 'rb'))
  
  
 #Se crea interfaz gráfica con streamlit para captura de los datos
