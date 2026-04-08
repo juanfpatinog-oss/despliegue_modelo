@@ -30,14 +30,14 @@ data_preparada=data.copy()
 #En despliegue drop_first= False
 data_preparada = pd.get_dummies(data_preparada, columns=['Unidad_Medida','Entrega'], drop_first=False, dtype=int)
 data_preparada.head()
-#Se adicionan las columnas faltantes
-data_preparada = data_preparada.reindex(columns=variables, fill_value=0)
 
- 
 #Se normaliza las variables númericas para la Red
 #En los despliegues no se llama fit
 variables_numericas = ['Numero_de_Transacciones', 'Cantidad', 'Reintegros', 'Precio_Unitario']
 data_preparada[variables_numericas] = min_max_scaler.transform(data_preparada[variables_numericas])
+
+#Se adicionan las columnas faltantes
+data_preparada = data_preparada.reindex(columns=variables, fill_value=0)
  
 #Hacemos la predicción
 Y_pred = modelo.predict(data_preparada)
