@@ -16,7 +16,7 @@ Unidad_Medida = st.selectbox('Unidad_Medida', ["'UN'","'ML'","'KG'","'LT'"])
 Numero_de_Transacciones = st.slider('Numero_de_Transacciones',min_value=1, max_value=150, value=0, step=1)
 Cantidad = st.slider('Cantidad',min_value=-30000, max_value=0, value=0, step=1)
 Reintegros = st.slider('Reintegro',min_value=0, max_value=2500, value=0, step=1)
-Precio_Unitario = st.slider('Precio_Unitario',min_value=1, max_value=30000000, value=0, step=100000)
+Precio_Unitario = st.slider('Precio_Unitario',min_value=1, max_value=30000000, value=1, step=100000)
 Entrega = st.selectbox('Entrega', ["'TOTAL'","'PARCIAL'","'REINTEGRO'"])
 
  
