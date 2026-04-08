@@ -28,7 +28,7 @@ data = pd.DataFrame(datos, columns=['Unidad_Medida', 'Numero_de_Transacciones', 
 #Se realiza la preparación
 data_preparada=data.copy()
 #En despliegue drop_first= False
-data_preparada = pd.get_dummies(data_preparada, columns=['Numero_de_Transacciones','Cantidad','Reintegros','Precio_Unitario'], drop_first=False, dtype=int)
+data_preparada = pd.get_dummies(data_preparada, columns=['Unidad_Medida','Entrega'], drop_first=False, dtype=int)
 data_preparada.head()
 #Se adicionan las columnas faltantes
 data_preparada = data_preparada.reindex(columns=variables, fill_value=0)
