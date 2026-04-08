@@ -11,29 +11,35 @@ modelo, labelencoder, min_max_scaler, variables = pickle.load(open(filename, 'rb
  
 #Se crea interfaz gráfica con streamlit para captura de los datos
 import streamlit as st
-st.title('Predicción de inversión en una tienda de videojuegos')
-Edad = st.slider('Edad', min_value=14, max_value=52, value=20, step=1)
-videojuego = st.selectbox('Videojuego', ["'Mass Effect'","'Battlefield'", "'Fifa'","'KOA: Reckoning'","'Crysis'","'Sim City'","'Dead Space'","'F1'"])
-Plataforma = st.selectbox('Plataforma', ["'Play Station'", "'Xbox'","PC","Otros"])
-Sexo = st.selectbox('Sexo', ['Hombre', 'Mujer'])
-Consumidor_habitual = st.selectbox('Consumidor_habitual', ['True', 'False'])
+st.title('Predicción de cluster de un material nuevo')
+Unidad_Medida = st.selectbox('Unidad Medida',["'UN'","'ML'","'KG'","'LT'"]
+Numero_de_Transacciones = st.slider('Numero de Transacciones',min_value=1, max_value=150, value=20, step=1)
+Cantidad = st.slider('Cantidad',min_value=-30000, max_value=0, value=20, step=1)
+Reintegros = st.slider('Reintegro',min_value=0, max_value=2500, value=20, step=1)
+Precio_Unitario = st.slider('Precio_Unitario',min_value=1, max_value=300000000, value=20, step=100000)
+Entrega = st.selectbox('Unidad Medida',["'TOTAL'","'PARCIAL'","'REINTEGRO'"]
+
  
 #Dataframe
-datos = [[Edad, videojuego,Plataforma,Sexo,Consumidor_habitual]]
-data = pd.DataFrame(datos, columns=['Edad', 'videojuego','Plataforma','Sexo','Consumidor_habitual']) #Dataframe con los mismos nombres de variables
+datos = [[Unidad_Medida, Numero_de_Transacciones, Cantidad, Reintegros, Precio_Unitario, Entrega]]
+data = pd.DataFrame(datos, columns=['Unidad_Medida', 'Numero_de_Transacciones', 'Cantidad', 'Reintegros', 'Precio_Unitario', 'Entrega']) #Dataframe con los mismos nombres de variables
+
  
 #Se realiza la preparación
 data_preparada=data.copy()
 #En despliegue drop_first= False
-data_preparada = pd.get_dummies(data_preparada, columns=['videojuego', 'Plataforma','Sexo', 'Consumidor_habitual'], drop_first=False, dtype=int)
+data_preparada = pd.get_dummies(data_preparada, columns=['Numero de Transacciones','Cantidad','Reintegros','Precio Unitario'], drop_first=False, dtype=int)
 data_preparada.head()
 #Se adicionan las columnas faltantes
 data_preparada=data_preparada.reindex(columns=variables,fill_value=0)
 data_preparada.head()
  
-#Se normaliza la edad para predecir con Knn, Red
+#Se normaliza las variables númericas para la Red
 #En los despliegues no se llama fit
-data_preparada[['Edad']]= min_max_scaler.transform(data_preparada[['Edad']])
+data_preparada[['Numero_de_Transacciones']]= min_max_scaler.transform(data_preparada[['Numero_de_Transacciones']])
+data_preparada[['Cantidad']]= min_max_scaler.transform(data_preparada[['Cantidad']])
+data_preparada[['Reintegros']]= min_max_scaler.transform(data_preparada[['Reintegros']])
+data_preparada[['Precio_Unitario']]= min_max_scaler.transform(data_preparada[['Precio_Unitario']])
 data_preparada.head()
  
 #Hacemos la predicción
