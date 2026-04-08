@@ -36,11 +36,8 @@ data_preparada = data_preparada.reindex(columns=variables, fill_value=0)
  
 #Se normaliza las variables númericas para la Red
 #En los despliegues no se llama fit
-data_preparada[['Numero_de_Transacciones']]= min_max_scaler.transform(data_preparada[['Numero_de_Transacciones']])
-data_preparada[['Cantidad']]= min_max_scaler.transform(data_preparada[['Cantidad']])
-data_preparada[['Reintegros']]= min_max_scaler.transform(data_preparada[['Reintegros']])
-data_preparada[['Precio_Unitario']]= min_max_scaler.transform(data_preparada[['Precio_Unitario']])
-
+variables_numericas = ['Numero_de_Transacciones', 'Cantidad', 'Reintegros', 'Precio_Unitario']
+data_preparada[variables_numericas] = min_max_scaler.transform(data_preparada[variables_numericas])
  
 #Hacemos la predicción
 Y_pred = modelo.predict(data_preparada)
