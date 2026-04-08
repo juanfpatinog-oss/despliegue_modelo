@@ -12,12 +12,12 @@ modelo, labelencoder, min_max_scaler, variables = pickle.load(open(filename, 'rb
 #Se crea interfaz gráfica con streamlit para captura de los datos
 import streamlit as st
 st.title('Predicción de cluster de un material nuevo')
-Unidad_Medida = st.selectbox('Unidad Medida',["'UN'","'ML'","'KG'","'LT'"]
+Unidad_Medida = st.selectbox('Unidad Medida', ["'UN'","'ML'","'KG'","'LT'"]
 Numero_de_Transacciones = st.slider('Numero de Transacciones',min_value=1, max_value=150, value=20, step=1)
 Cantidad = st.slider('Cantidad',min_value=-30000, max_value=0, value=20, step=1)
 Reintegros = st.slider('Reintegro',min_value=0, max_value=2500, value=20, step=1)
 Precio_Unitario = st.slider('Precio_Unitario',min_value=1, max_value=300000000, value=20, step=100000)
-Entrega = st.selectbox('Unidad Medida',["'TOTAL'","'PARCIAL'","'REINTEGRO'"]
+Entrega = st.selectbox('Unidad Medida', ["'TOTAL'","'PARCIAL'","'REINTEGRO'"]
 
  
 #Dataframe
