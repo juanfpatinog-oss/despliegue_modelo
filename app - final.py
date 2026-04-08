@@ -13,11 +13,11 @@ modelo, labelencoder, min_max_scaler, variables = pickle.load(open(filename, 'rb
 import streamlit as st
 st.title('Predicción de cluster de un material nuevo')
 Unidad_Medida = st.selectbox('Unidad Medida', ["'UN'","'ML'","'KG'","'LT'"])
-Numero_de_Transacciones = st.slider('Numero de Transacciones',min_value=1, max_value=150, value=20, step=1)
-Cantidad = st.slider('Cantidad',min_value=-30000, max_value=0, value=20, step=1)
-Reintegros = st.slider('Reintegro',min_value=0, max_value=2500, value=20, step=1)
-Precio_Unitario = st.slider('Precio_Unitario',min_value=1, max_value=300000000, value=20, step=100000)
-Entrega = st.selectbox('Unidad Medida', ["'TOTAL'","'PARCIAL'","'REINTEGRO'"])
+Numero_de_Transacciones = st.slider('Numero de Transacciones',min_value=1, max_value=150, value=0, step=1)
+Cantidad = st.slider('Cantidad',min_value=-30000, max_value=0, value=0, step=1)
+Reintegros = st.slider('Reintegro',min_value=0, max_value=2500, value=0, step=1)
+Precio_Unitario = st.slider('Precio_Unitario',min_value=1, max_value=300000000, value=0, step=100000)
+Entrega = st.selectbox('Entrega', ["'TOTAL'","'PARCIAL'","'REINTEGRO'"])
 
  
 #Dataframe
@@ -28,7 +28,7 @@ data = pd.DataFrame(datos, columns=['Unidad_Medida', 'Numero_de_Transacciones', 
 #Se realiza la preparación
 data_preparada=data.copy()
 #En despliegue drop_first= False
-data_preparada = pd.get_dummies(data_preparada, columns=['Numero de Transacciones','Cantidad','Reintegros','Precio Unitario'], drop_first=False, dtype=int)
+data_preparada = pd.get_dummies(data_preparada, columns=['Numero_de_Transacciones','Cantidad','Reintegros','Precio_Unitario'], drop_first=False, dtype=int)
 data_preparada.head()
 #Se adicionan las columnas faltantes
 data_preparada=data_preparada.reindex(columns=variables,fill_value=0)
